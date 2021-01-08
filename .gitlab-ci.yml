@@ -1,0 +1,29 @@
+stages:
+    - build
+    - deploy
+cache:
+    paths:
+        - node_modules/
+
+Build:
+    tags:
+        - frontend
+    stage: build
+    script:
+        - yarn install --prefer-offline
+        - yarn build
+    artifacts:
+        paths:
+            - dist/pwa
+
+Deploy:
+    tags:
+        - frontend
+    stage: deploy
+    script:
+        - cd dist/pwa
+        - netdeploy -I $SITE_ID -T $NETLIFY_TOKEN
+    only:
+        - prod
+        - stage
+        - master

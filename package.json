@@ -1,0 +1,53 @@
+{
+    "name": "soapy",
+    "version": "0.0.1",
+    "description": "WebApp to manage and monitor construction sites",
+    "productName": "Soapy",
+    "author": "kirinnee97@gmail.com",
+    "private": true,
+    "scripts": {
+        "dev": "quasar dev",
+        "build": "quasar build -m pwa"
+    },
+    "dependencies": {
+        "@auth0/auth0-spa-js": "^1.12.1",
+        "@hqoss/monads": "^0.4.0",
+        "@kirinnee/core": "^0.7.5",
+        "@kirinnee/gstore": "^0.0.3",
+        "@quasar/extras": "^1.0.0",
+        "core-js": "^3.6.5",
+        "jwt-decode": "^3.0.0",
+        "lottie-web": "^5.7.3",
+        "quasar": "^1.0.0",
+        "swiper": "^6.3.3",
+        "ts-union": "^2.3.0",
+        "vue-awesome-swiper": "^4.1.1",
+        "vue-class-component": "^7.2.2",
+        "vue-property-decorator": "^8.3.0",
+        "vueg": "^1.4.5"
+    },
+    "devDependencies": {
+        "@quasar/app": "^2.0.0",
+        "@types/jwt-decode": "^2.2.1",
+        "@types/node": "^10.17.15",
+        "terser-webpack-plugin": "^5.0.3",
+        "workbox-webpack-plugin": "^5.0.0"
+    },
+    "browserslist": [
+        "ie >= 11",
+        "last 10 Chrome versions",
+        "last 10 Firefox versions",
+        "last 4 Edge versions",
+        "last 7 Safari versions",
+        "last 8 Android versions",
+        "last 8 ChromeAndroid versions",
+        "last 8 FirefoxAndroid versions",
+        "last 10 iOS versions",
+        "last 5 Opera versions"
+    ],
+    "engines": {
+        "node": ">= 10.18.1",
+        "npm": ">= 6.13.4",
+        "yarn": ">= 1.21.1"
+    }
+}
