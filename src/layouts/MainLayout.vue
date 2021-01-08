@@ -12,7 +12,7 @@
                     {{ Store.StoreValue.title }}
                 </q-toolbar-title>
 
-                <q-btn dense flat round icon="menu" @click="right = !right"/>
+                <!--                <q-btn dense flat round icon="menu" @click="right = !right"/>-->
             </q-toolbar>
             <q-tabs v-show="ShowTabs" align="left">
                 <q-route-tab v-for="t in Tabs" :key="t.label" :to="t.link" :icon="t.icon" :label="t.label"

@@ -6,9 +6,10 @@
                 <h5 style="margin: 0">Add New Device</h5>
                 <q-form @submit="onSubmit"
                         class="q-gutter-md">
-                    <q-input label="Device UUID" filled v-model="deviceId"
-                             hint="Device UUID provided during set up"
-                             :rules="uuidRule"
+                    <q-select label="Device UUID" filled v-model="deviceId"
+                              :options="uuids"
+                              hint="Device UUID provided during set up"
+                              :rules="uuidRule"
                     />
                     <q-input label="Device Password" filled v-model="devicePassword" type="password" hint="Device password configured during set up"
                              :rules="passwordRule"
@@ -51,9 +52,30 @@ export default class AddNewDevice extends Vue {
     name = "";
     description = "";
 
+    uuids: string[] = [];
+
     uuidRule: any[] = [uuidRegex];
     passwordRule: any[] = [requiredRule];
     nameRule: any[] = [requiredRule];
+
+    created() {
+        this.load();
+    }
+
+    async load() {
+        const token = await this.$auth.CoreToken;
+        const r = await this.$api.Get<string[]>(`Hardware`, null, token)
+        const p = this;
+        const a = new Alert(this.$q);
+        r.match({
+            err(val: ApiError) {
+                a.Bad("Error");
+                console.error(val);
+            }, ok(val) {
+                p.uuids = val;
+            }
+        })
+    }
 
     async onSubmit() {
         const token = await this.$auth.CoreToken;

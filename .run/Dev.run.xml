@@ -1,0 +1,17 @@
+<component name="ProjectRunConfigurationManager">
+    <configuration default="false" name="Dev" type="js.build_tools.npm">
+        <package-json value="$PROJECT_DIR$/package.json"/>
+        <command value="run"/>
+        <scripts>
+            <script value="dev"/>
+        </scripts>
+        <node-interpreter value="project"/>
+        <envs>
+            <env name="AUTH0_DOMAIN" value="soapy.jp.auth0.com"/>
+            <env name="AUTH0_CLIENT_ID" value="gHzZiczuE3MEdFbZX4mahexaB8vLjLRA"/>
+            <env name="AUTH0_AUD" value="https://back.localhost"/>
+            <env name="API" value="http://core.localhost:4001"/>
+        </envs>
+        <method v="2"/>
+    </configuration>
+</component>

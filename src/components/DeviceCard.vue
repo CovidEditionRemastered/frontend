@@ -1,18 +1,22 @@
 <template>
-    <q-card style="width: 300px">
+    <q-card style="width: 350px">
         <q-card-section class="bg-secondary text-white">
-            <div class="text-h6">{{ device.name }}</div>
-            <div class="text-subtitle2">{{ device.description }}</div>
+            <div class="row justify-between">
+                <div>
+                    <div class="text-h6">{{ device.name }}</div>
+                    <div class="text-subtitle2">{{ device.description }}</div>
+                </div>
+
+                <q-toggle v-model="device.toggle" @input="Toggle"/>
+            </div>
         </q-card-section>
         <q-separator/>
         <q-card-actions align="between">
-            <div class="q-gutter-sm row">
-                <DeleteDevice :name="device.name" :uuid="device.uuid" @delete="$emit('delete')"/>
-                <EditDevice :original-name="device.name" :original-description="device.description" :uuid="device.uuid"
-                            @edit="$emit('edit')"
-                />
-            </div>
-            <q-toggle v-model="device.toggle" @input="Toggle"/>
+            <DeleteDevice :name="device.name" :uuid="device.uuid" @delete="$emit('delete')"/>
+            <EditDevice :original-name="device.name" :original-description="device.description" :uuid="device.uuid"
+                        @edit="$emit('edit')"
+            />
+            <q-btn color="primary" @click="$router.push(`/${device.uuid}`)">View</q-btn>
         </q-card-actions>
     </q-card>
 </template>

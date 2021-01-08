@@ -3,6 +3,7 @@ import Error404 from "pages/Error404.vue";
 import Index from "pages/Index.vue";
 import SwipeSample from "pages/SwipeSample.vue";
 import Home from "pages/Home.vue";
+import DeviceConfiguration from "pages/DeviceConfiguration.vue";
 
 
 const routes: RouteConfig[] = [
@@ -13,7 +14,16 @@ const routes: RouteConfig[] = [
         meta: {
             transition: {},
             auth: [false, true]
-        }
+        },
+    },
+    {
+        name: 'dashboard',
+        path: '/:deviceId',
+        component: DeviceConfiguration,
+        meta: {
+            transition: {},
+            auth: [false, true]
+        },
     },
     {
         name: 'home',
