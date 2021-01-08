@@ -28,8 +28,9 @@ module.exports = configure(function (ctx) {
             vueRouterMode: 'history', // available values: 'hash', 'history'
             env: {
                 AUTH0_AUD: process.env.AUTH0_AUD,
-                AUTH0_DOMAIN:  process.env.AUTH0_DOMAIN,
-                AUTH0_CLIENT_ID:  process.env.AUTH0_CLIENT_ID,
+                AUTH0_DOMAIN: process.env.AUTH0_DOMAIN,
+                AUTH0_CLIENT_ID: process.env.AUTH0_CLIENT_ID,
+                API: process.env.API,
             },
 
             extendWebpack(cfg) {
@@ -73,7 +74,7 @@ module.exports = configure(function (ctx) {
             pwa: true
         },
         pwa: {
-            workboxPluginMode: 'InjectManifest', // 'GenerateSW' or 'InjectManifest'
+            workboxPluginMode: 'GenerateSW', // 'GenerateSW' or 'InjectManifest'
             manifest: {
                 name: `Soapy`,
                 short_name: `Soapy`,

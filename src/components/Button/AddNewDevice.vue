@@ -69,7 +69,6 @@ export default class AddNewDevice extends Vue {
         r.match({
             err(val: ApiError) {
                 a.Bad("Error occurred");
-
                 console.error(val);
             }, ok(val) {
                 a.Ok(val.name + " has been added");
