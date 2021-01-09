@@ -7,7 +7,7 @@
 
                 <q-toolbar-title>
                     <q-avatar>
-                        <img src="https://cdn.quasar.dev/logo/svg/quasar-logo.svg" alt="logo">
+                        <img :src="logo" alt="logo">
                     </q-avatar>
                     {{ Store.StoreValue.title }}
                 </q-toolbar-title>
@@ -57,7 +57,7 @@ import {Route} from 'vue-router'
 import {Link} from "src/classLibrary/Core/StrongTyping/Link";
 import {Tab} from "src/classLibrary/Core/StrongTyping/Tabs";
 import Profile from "components/Core/Profile.vue";
-
+import logo from "../assets/quasar-logo-full.svg";
 
 const ENTER_DEF = 'fadeInRight';
 const LEAVE_DEF = 'fadeInLeft';
@@ -67,6 +67,10 @@ const LEAVE_DEF = 'fadeInLeft';
     components: {Profile, NavLink}
 })
 export default class MainLayout extends Vue {
+
+    get logo() {
+        return logo;
+    }
 
     created() {
         this.$router.beforeEach((to: Route, from: Route, next) => {
