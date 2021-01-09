@@ -27,7 +27,7 @@
                     </q-card-section>
                     <q-card-section>
                         <q-list>
-                            <ProgramRow :program="p" v-for="p in device.programs"/>
+                            <ProgramRow :program="p" v-for="p in device.programs" :device="device.principal" @delete="init"/>
                         </q-list>
                     </q-card-section>
                     <AddProgram :device-id="routeParams.deviceId" @added="init"/>
@@ -60,6 +60,8 @@ import DeleteDevice from "components/Button/DeleteDevice.vue";
 import EditDevice from "components/Button/EditDevice.vue";
 import AddProgram from "components/Button/AddProgram.vue";
 import ProgramRow from "components/ProgramRow.vue";
+import TriggerRow from "components/TriggerRow.vue";
+import AddTrigger from "components/Button/AddTrigger.vue";
 
 
 @Component({

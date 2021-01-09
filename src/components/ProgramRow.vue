@@ -10,9 +10,9 @@
 
         <q-item-section top side>
             <div class="text-grey-8 q-gutter-xs">
-                <q-btn class="gt-xs" size="12px" flat dense round icon="delete" @click="del = true"/>
-                <q-btn class="gt-xs" size="12px" flat dense round icon="play_arrow" v-if="!started" @click="Start"/>
-                <q-circular-progress class="gt-xs" size="12px" indeterminate v-else/>
+                <q-btn size="12px" flat dense round icon="delete" @click="del = true"/>
+                <q-btn size="12px" flat dense round icon="play_arrow" v-if="!started" @click="Start"/>
+                <q-circular-progress size="12px" indeterminate v-else/>
             </div>
         </q-item-section>
         <q-dialog v-model="del">
@@ -23,7 +23,7 @@
                     <q-btn flat @click="del = false">
                         Back
                     </q-btn>
-                    <q-btn icon="delete" color="negative" outline>
+                    <q-btn icon="delete" color="negative" outline @click="deleteProgram">
                         Delete
                     </q-btn>
                 </div>
@@ -38,20 +38,47 @@
 
 <script lang='ts'>
 import {Component, Prop, Vue} from 'vue-property-decorator';
-import {ProgramResponse} from "src/classLibrary/response/models";
+import {DevicePrincipalResponse, ProgramResponse} from "src/classLibrary/response/models";
+import {Alert} from "src/classLibrary/Alert";
 
-const $$ = val => new Promise(resolve => setTimeout(resolve, val));
+const $$ = (s: number) => new Promise(resolve => setTimeout(resolve, s));
 
 @Component({})
 export default class ProgramRow extends Vue {
     del = false;
     started = false;
 
+    @Prop() device!: DevicePrincipalResponse
     @Prop() program!: ProgramResponse
+
+    async deleteProgram() {
+        const token = await this.$auth.CoreToken;
+        const r = await this.$api.QDelete(`Device/${this.device.id}/Program/${this.program.id}`, null, token);
+        const a = new Alert(this.$q);
+        if (r.isNone()) {
+            a.Ok("Successfully deleted");
+            this.del = false;
+            this.$emit("delete");
+            return;
+        }
+        const val = r.unwrap();
+        console.error(val);
+    }
+
+    async Toggle() {
+        const token = await this.$auth.CoreToken;
+        this.device.powerState = !this.device.powerState;
+        await this.$api.QPost(`Hardware/user/${this.device?.id}?state=${this.device?.powerState ? 'true' : 'false'}`, null, token);
+
+    }
 
     async Start() {
         this.started = true;
-        await $$(2000);
+        const r = JSON.parse(this.program.code);
+        for (let i = 0; i < r.length; i++) {
+            await this.Toggle();
+            await $$(r[i] + 100);
+        }
         this.started = false;
 
     }
