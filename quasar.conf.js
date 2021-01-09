@@ -74,7 +74,10 @@ module.exports = configure(function (ctx) {
             pwa: true
         },
         pwa: {
-            workboxPluginMode: 'GenerateSW', // 'GenerateSW' or 'InjectManifest'
+            workboxPluginMode: 'InjectManifest', // 'GenerateSW' or 'InjectManifest'
+            workboxOptions: {
+                exclude: [/_redirects/],
+            },
             manifest: {
                 name: `Soapy`,
                 short_name: `Soapy`,
